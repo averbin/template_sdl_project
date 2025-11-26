@@ -1,6 +1,10 @@
 #include<iostream>
 
+#if defined(_WIN32)
+#include <windows.h>
+#endif
 #include<GL/gl.h>
+
 #include<SDL3/SDL.h>
 
 //Starts up SDL, creates window, and Initializes OpenGL
@@ -62,7 +66,7 @@ bool Init()
 {
 	bool success = true;
 	
-	if(SDL_Init( SDL_INIT_VIDEO) < 0)
+	if(!SDL_Init( SDL_INIT_VIDEO))
 	{
 		std::cerr << "SDL could not Inititalize! SDL Error: " 
 			<< SDL_GetError() << "\n";
@@ -96,7 +100,7 @@ bool Init()
 			}
 			else
 			{
-				if(SDL_GL_SetSwapInterval(1) < 0)
+				if(!SDL_GL_SetSwapInterval(1))
 				{
 					std::cerr << "Warrning: Unable to set VSync! SDL Error: "
 						<< SDL_GetError() << "\n";
@@ -110,6 +114,8 @@ bool Init()
 			}
 		}
 	}
+
+	Close();
 
 	return success;
 }
