@@ -59,6 +59,9 @@ int main()
 		Render();		
 		
 	}
+
+	Close();
+
 	return 0;
 }
 
@@ -114,8 +117,6 @@ bool Init()
 			}
 		}
 	}
-
-	Close();
 
 	return success;
 }
